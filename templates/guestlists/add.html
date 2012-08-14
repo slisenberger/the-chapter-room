@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %} New Guestlist {% endblock %}
+
+{% block content %}
+<form id="new_guestlist" method="post" action="/guestlist/add/">
+{% csrf_token %}
+<fieldset>
+<table>
+	<tr>
+		<td class="formlabel">Bids per Brother: </td>
+		<td class="forminput"><input type="text" name="bro_bids" /></td>
+	</tr>
+	<tr>
+		<td class="formlabel">Bids per Pledge: </td>
+		<td class="forminput"><input type="text" name="pledge_bids" /></td>
+	</tr>
+	
+	<tr>	
+		<td class="formlabel">Closing Time</td>
+		<td class="forminput"><select name="closehour">
+							{% for num in twelve_range %}
+							<option value="{{num }}">{{ num }}</option>
+							{% endfor %}
+							</select>
+							<select>
+								<option value="0">:00</option>
+								<option value="15">:15</option>
+								<option value="30">:30</option>
+								<option value="45">:45</option>
+							  </select>
+							  <select name="partofday">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+							</select>
+							</td>
+		<td class="formlabel"> Date </td>
+		<td class="forminput"><input type="text" name="closedate" id="closedate"/></td>
+	</tr>
+</table>
+</fieldset>
+<input type="submit" value="New Guestlist" />
+</form>
+
+
+{% endblock %}
+
+{% block scripts %} 
+<!-- form validation script -->
+<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#new_guestlist").validate({
+			rules : {
+				"bro_bids": "required",
+				"pledge_bids": "required",
+				"closedate": "required",
+				"closehour": "required",
+				"closeminute" : "required",
+				"partofday" : "required"
+			}
+		});
+		
+		$("#closedate").datepicker();
+	
+	});
+</script>
+{% endblock %}

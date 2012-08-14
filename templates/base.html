@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Chapter Room</title>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/overcast/jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style.css">
+</head>
+<body>
+  <div id="common_header">
+    common header elements
+  </div>
+  {% if user.is_authenticated %}
+  <div id="portal_header">
+    <h2>
+    The Chapter Room
+    </h2>
+    <span id="user_bar">
+	
+      Welcome, {{ user.username }} | Profile | <a href="/logout">logout</a>
+    </span>
+  </div>
+      {% endif %}
+  <div id="page">
+  {% if user.is_authenticated %}
+  <div id="sidebar">
+    <a href="/guestlist">Guestlists</a> <br />
+    <a href="#">ICON2</a> <br />
+  </div>
+  {% endif %}
+  <div id="main_content">
+    <h1> {% block title %} {% endblock %} </h1>
+  {% block content %} {% endblock %}
+  </div>
+  </div> <!--page-->
+  {% if user.is_authenticated %}
+  <div id="footer">
+  footer text goes here.
+  </div>
+  {% endif %}
+</body>
+ <!-- Jquery -->
+<script type="text/javascript" src="{{ STATIC_URL }}jquery-1.7.2.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
+{% block scripts %} {% endblock %}
+
+</html>
+
