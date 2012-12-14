@@ -12,6 +12,7 @@ def index(request):
 @login_required
 def add(request):
     twelve_range = []
+    # random comment to prove my point.
     for num in range(12):
         twelve_range.append(num + 1)
     
