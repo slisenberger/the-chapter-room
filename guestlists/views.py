@@ -13,6 +13,7 @@ def index(request):
 def add(request):
     twelve_range = []
     # random comment to prove my point.
+    # this is easy.
     for num in range(12):
         twelve_range.append(num + 1)
     
